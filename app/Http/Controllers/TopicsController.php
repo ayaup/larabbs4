@@ -26,7 +26,7 @@ class TopicsController extends Controller
     public function show(Topic $topic)
     {
         return view('topics.show', compact('topic'));
-    }c
+    }
 
 	public function create(Topic $topic)
 	{
@@ -36,9 +36,10 @@ class TopicsController extends Controller
 
 	public function store(TopicRequest $request, Topic $topic)
 	{
-        $topic->($request->all());
+        $topic->fill($request->all());
         $topic->user_id = Auth::id();
           $topic->save();
+          
 		return redirect()->route('topics.show', $topic->id)->with('success', '帖子创建成功！');
 	}
 
